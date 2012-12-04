@@ -1,0 +1,4 @@
+prepare/data
+prepare/tmp
+*~
+*.pyc
