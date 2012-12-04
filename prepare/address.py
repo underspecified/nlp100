@@ -2,6 +2,22 @@
 import sys
 import csv
 
+# utf-8 i/o plz!
+from functools import partial
+import codecs
+codecs.register_error('UnicodeDecodeError', codecs.replace_errors)
+open = partial(codecs.open, encoding='utf-8', errors='replace')
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
+sys.stdout.errors = 'replace'
+sys.stdin = codecs.getreader('utf-8')(sys.stdin)
+sys.stdin.errors = 'replace'
+sys.stderr = codecs.getwriter('utf-8')(sys.stderr)
+sys.stderr.errors = 'replace'
+
 D = set()
 for row in csv.reader(sys.stdin):
     s1 = unicode(''.join((row[6], row[7])))
